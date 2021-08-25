@@ -1,8 +1,16 @@
 import React, {useState, useEffect} from 'react';
-import {View, Text} from 'react-native';
+import {
+  View,
+  Text,
+  ScrollView,
+  StyleSheet,
+  Image,
+  useWindowDimensions,
+} from 'react-native';
 import axios from 'axios';
+import {Card, Paragraph, Title} from 'react-native-paper';
 
-const CharacterList = () => {
+const CharacterList = ({navigation}) => {
   const [characters, setCharacters] = useState([]); //state for characters data
 
   useEffect(() => {
@@ -12,7 +20,9 @@ const CharacterList = () => {
   const fetchData = async () => {
     console.log('characters');
     try {
-      const response = await axios.get('https://www.breakingbadapi.com/api/characters');
+      const response = await axios.get(
+        'https://www.breakingbadapi.com/api/characters',
+      );
       setCharacters(response.data);
       console.log('in characters');
     } catch (error) {
@@ -22,11 +32,31 @@ const CharacterList = () => {
 
   return (
     <View>
-      {characters.map((i, index) => {
-        return <Text key={index}>{i.name}</Text>;
-      })}
+      <ScrollView>
+        {characters.map((i, index) => {
+          return (
+            <Card
+              key={index}
+              elevation={1}
+              mode="elevated"
+              style={styles.card}
+              onPress={() => navigation.navigate('Character', {id: 2})}>
+              <Card.Content>
+                <Card.Cover source={{uri: i.img}} />
+                <Title>{i.name}</Title>
+              </Card.Content>
+            </Card>
+          );
+        })}
+      </ScrollView>
     </View>
   );
 };
 
 export default CharacterList;
+
+const styles = StyleSheet.create({
+  card: {
+    margin: 12,
+  },
+});
