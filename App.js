@@ -1,6 +1,7 @@
 import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import {Provider as PaperProvider} from 'react-native-paper';
 import {
   SafeAreaView,
   ScrollView,
@@ -17,12 +18,14 @@ const Stack = createNativeStackNavigator();
 
 export default App = () => {
   return (
+    <PaperProvider>
     <NavigationContainer>
       <Stack.Navigator initialRouteName="CharacterList">
         <Stack.Screen name="CharacterList" component={CharacterList} />
         <Stack.Screen name="Character" component={Character} />
       </Stack.Navigator>
     </NavigationContainer>
+    </PaperProvider>
   );
 };
 
