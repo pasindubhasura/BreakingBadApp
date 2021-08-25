@@ -19,12 +19,16 @@ const Stack = createNativeStackNavigator();
 export default App = () => {
   return (
     <PaperProvider>
-    <NavigationContainer>
-      <Stack.Navigator initialRouteName="CharacterList">
-        <Stack.Screen name="CharacterList" component={CharacterList} />
-        <Stack.Screen name="Character" component={Character} />
-      </Stack.Navigator>
-    </NavigationContainer>
+      <NavigationContainer>
+        <Stack.Navigator initialRouteName="CharacterList">
+          <Stack.Screen
+            name="CharacterList"
+            component={CharacterList}
+            options={{headerShown: false}}
+          />
+          <Stack.Screen name="Character" component={Character} />
+        </Stack.Navigator>
+      </NavigationContainer>
     </PaperProvider>
   );
 };
