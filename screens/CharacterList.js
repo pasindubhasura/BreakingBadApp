@@ -8,7 +8,7 @@ import {
   useWindowDimensions,
 } from 'react-native';
 import axios from 'axios';
-import {Card, Paragraph, Title} from 'react-native-paper';
+import {Card, Paragraph, Title, Appbar} from 'react-native-paper';
 
 const CharacterList = ({navigation}) => {
   const [characters, setCharacters] = useState([]); //state for characters data
@@ -32,6 +32,9 @@ const CharacterList = ({navigation}) => {
 
   return (
     <View>
+      <Appbar.Header>
+        <Appbar.Content title="Breaking Bad Characters" />
+      </Appbar.Header>
       <ScrollView>
         {characters.map((i, index) => {
           return (
@@ -40,7 +43,7 @@ const CharacterList = ({navigation}) => {
               elevation={1}
               mode="elevated"
               style={styles.card}
-              onPress={() => navigation.navigate('Character', {id: 2})}>
+              onPress={() => navigation.navigate('Character', {id: i.char_id})}>
               <Card.Content>
                 <Card.Cover source={{uri: i.img}} />
                 <Title>{i.name}</Title>
