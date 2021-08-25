@@ -26,7 +26,11 @@ export default App = () => {
             component={CharacterList}
             options={{headerShown: false}}
           />
-          <Stack.Screen name="Character" component={Character} />
+          <Stack.Screen
+            name="Character"
+            component={Character}
+            options={{headerShown: false}}
+          />
         </Stack.Navigator>
       </NavigationContainer>
     </PaperProvider>
