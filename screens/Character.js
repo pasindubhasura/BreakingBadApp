@@ -1,10 +1,11 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import {View, Text} from 'react-native';
 
-const Character = () => {
+const Character = ({route, navigation}) => {
+  const {id} = route.params;
   return (
     <View>
-      <Text>Character</Text>
+      <Text>{id}</Text>
     </View>
   );
 };
