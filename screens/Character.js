@@ -1,16 +1,12 @@
 import React, {useState, useEffect} from 'react';
 import {View, Text, StyleSheet, Image} from 'react-native';
 import {Appbar} from 'react-native-paper';
-// import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import axios from 'axios';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
-import FitImage from 'react-native-fit-image';
 
 const Character = ({route, navigation}) => {
   const {id} = route.params;
   const [character, setCharacter] = useState({});
-
-  const back = <FontAwesome name="chevron-left" color="red" size={40} />;
 
   useEffect(() => {
     fetchData();
@@ -22,7 +18,6 @@ const Character = ({route, navigation}) => {
         `https://www.breakingbadapi.com/api/characters/${id}`,
       );
       setCharacter(response.data[0]);
-      // console.log(character);
     } catch (error) {
       console.log(error);
     }
@@ -47,16 +42,20 @@ const Character = ({route, navigation}) => {
         </View>
         <View style={styles.detailCard}>
           <View style={styles.row}>
-            <Text style={styles.title}>Occupation</Text>
-            <Text style={styles.details}>{character.occupation}</Text>
+            <Text style={styles.title}>Nick Name</Text>
+            <Text style={styles.details}>{character.nickname}</Text>
           </View>
           <View style={styles.row}>
-            <Text style={styles.title}>Appearance</Text>
-            <Text style={styles.details}>{character.appearance}</Text>
+            <Text style={styles.title}>Birthday</Text>
+            <Text style={styles.details}>{character.birthday}</Text>
           </View>
           <View style={styles.row}>
             <Text style={styles.title}>Status</Text>
             <Text style={styles.details}>{character.status}</Text>
+          </View>
+          <View style={styles.row}>
+            <Text style={styles.title}>Portrayed by</Text>
+            <Text style={styles.details}>{character.portrayed}</Text>
           </View>
         </View>
       </View>
@@ -81,7 +80,6 @@ const styles = StyleSheet.create({
     width: '100%',
     height: '50%',
     alignItems: 'center',
-    backgroundColor: 'red',
   },
   appBar: {
     backgroundColor: '#121212',
@@ -107,7 +105,6 @@ const styles = StyleSheet.create({
   row: {
     flexDirection: 'row',
     width: '100%',
-    marginBottom: 12,
     padding: 10,
     marginTop: 5,
   },
