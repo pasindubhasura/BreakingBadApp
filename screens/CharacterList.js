@@ -32,7 +32,7 @@ const CharacterList = ({navigation}) => {
 
   return (
     <View>
-      <Appbar.Header>
+      <Appbar.Header style={styles.appBar}>
         <Appbar.Content title="Breaking Bad Characters" />
       </Appbar.Header>
       <ScrollView>
@@ -61,5 +61,8 @@ export default CharacterList;
 const styles = StyleSheet.create({
   card: {
     margin: 12,
+  },
+  appBar: {
+    backgroundColor: '#121212',
   },
 });
