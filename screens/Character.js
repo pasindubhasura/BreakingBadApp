@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {View, Text} from 'react-native';
+import {View, Text, StyleSheet, Image} from 'react-native';
 import {Appbar} from 'react-native-paper';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import axios from 'axios';
@@ -11,7 +11,7 @@ const Character = ({route, navigation}) => {
 
   useEffect(() => {
     fetchData();
-  }, id);
+  }, [id]);
 
   const fetchData = async () => {
     try {
@@ -19,7 +19,7 @@ const Character = ({route, navigation}) => {
         `https://www.breakingbadapi.com/api/characters/${id}`,
       );
       setCharacter(response.data[0]);
-      console.log('in characters');
+      console.log(character);
     } catch (error) {
       console.log(error);
     }
@@ -28,6 +28,7 @@ const Character = ({route, navigation}) => {
   return (
     <View>
       <Appbar.Header>
+        <Appbar.Content title={character.name} />
         <Appbar.Action
           onPress={() => {
             navigation.popToTop();
@@ -35,11 +36,42 @@ const Character = ({route, navigation}) => {
           icon={<FontAwesome5 name={'chevron-left'} solid color={'white'} />}
         />
       </Appbar.Header>
-      <Text>{id}</Text>
-      <Text>{character.name}</Text>
-      <FontAwesome5 name={'chevron-left'} solid color={'white'} />
+      <View style={styles.card}>
+        <View style={styles.imageContainer}>
+          <Image source={{uri: character.img}} style={styles.img} />
+          <View
+            style={{
+              position: 'absolute',
+              left: 8,
+              bottom: 5,
+            }}>
+            <Text style={styles.nameText}>{character.name}</Text>
+          </View>
+        </View>
+      </View>
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  card: {
+    backgroundColor: 'red',
+    width: '100%',
+    height: '100%',
+    alignItems: 'center',
+  },
+  img: {
+    width: '100%',
+    height: '100%',
+  },
+  nameText: {
+    color: 'white',
+    fontSize: 25,
+  },
+  imageContainer: {
+    width: '100%',
+    height: '45%',
+  },
+});
 
 export default Character;
