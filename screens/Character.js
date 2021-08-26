@@ -4,6 +4,7 @@ import {Appbar} from 'react-native-paper';
 // import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import axios from 'axios';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import FitImage from 'react-native-fit-image';
 
 const Character = ({route, navigation}) => {
   const {id} = route.params;
@@ -42,16 +43,9 @@ const Character = ({route, navigation}) => {
       </Appbar.Header>
       <View style={styles.card}>
         <View style={styles.imageContainer}>
-          <Image source={{uri: character.img}} style={styles.img} />
-          <View
-            style={{
-              position: 'absolute',
-              left: 8,
-              bottom: 5,
-            }}>
-            <Text style={styles.nameText}>{character.name}</Text>
-          </View>
+          <FitImage source={{uri: character.img}} style={styles.img} />
         </View>
+        <View></View>
       </View>
     </View>
   );
@@ -62,19 +56,18 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     width: '100%',
     height: '100%',
-    alignItems: 'center',
   },
   img: {
-    width: '100%',
-    height: '100%',
+    width: 400,
+    height: 450,
+    resizeMode: 'cover',
+    overflow: 'hidden',
   },
-  nameText: {
-    color: 'white',
-    fontSize: 25,
-  },
+
   imageContainer: {
     width: '100%',
-    height: '45%',
+    height: '50%',
+    alignItems: 'center',
   },
   appBar: {
     backgroundColor: '#121212',
