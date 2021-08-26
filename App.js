@@ -19,6 +19,7 @@ const Stack = createNativeStackNavigator();
 export default App = () => {
   return (
     <PaperProvider>
+      <StatusBar backgroundColor="#424242" />
       <NavigationContainer>
         <Stack.Navigator initialRouteName="CharacterList">
           <Stack.Screen
