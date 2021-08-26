@@ -43,10 +43,21 @@ const Character = ({route, navigation}) => {
       </Appbar.Header>
       <View style={styles.card}>
         <View style={styles.imageContainer}>
-          <FitImage source={{uri: character.img}} style={styles.img} />
+          <Image source={{uri: character.img}} style={styles.img} />
         </View>
         <View style={styles.detailCard}>
-          <Text>{character.occupation}</Text>
+          <View style={styles.row}>
+            <Text style={styles.title}>Occupation</Text>
+            <Text style={styles.details}>{character.occupation}</Text>
+          </View>
+          <View style={styles.row}>
+            <Text style={styles.title}>Appearance</Text>
+            <Text style={styles.details}>{character.appearance}</Text>
+          </View>
+          <View style={styles.row}>
+            <Text style={styles.title}>Status</Text>
+            <Text style={styles.details}>{character.status}</Text>
+          </View>
         </View>
       </View>
     </View>
@@ -60,8 +71,8 @@ const styles = StyleSheet.create({
     height: '100%',
   },
   img: {
-    width: 400,
-    height: 450,
+    width: '100%',
+    height: '100%',
     resizeMode: 'cover',
     overflow: 'hidden',
   },
@@ -70,15 +81,16 @@ const styles = StyleSheet.create({
     width: '100%',
     height: '50%',
     alignItems: 'center',
+    backgroundColor: 'red',
   },
   appBar: {
     backgroundColor: '#121212',
   },
   detailCard: {
-    marginTop: 80,
+    marginTop: 12,
     marginLeft: 12,
     marginRight: 12,
-    height: '23%',
+    height: '30%',
     borderRadius: 8,
     borderStyle: 'solid',
     shadowColor: '#000',
@@ -90,6 +102,24 @@ const styles = StyleSheet.create({
     shadowRadius: 1.41,
 
     elevation: 2,
+    justifyContent: 'center',
+  },
+  row: {
+    flexDirection: 'row',
+    width: '100%',
+    marginBottom: 12,
+    padding: 10,
+    marginTop: 5,
+  },
+  title: {
+    flex: 1,
+    fontWeight: 'bold',
+    fontSize: 20,
+    marginLeft: 8,
+  },
+  details: {
+    fontSize: 20,
+    marginRight: 8,
   },
 });
 
