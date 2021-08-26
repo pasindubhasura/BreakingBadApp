@@ -35,7 +35,7 @@ const CharacterList = ({navigation}) => {
       <Appbar.Header style={styles.appBar}>
         <Appbar.Content title="Breaking Bad Characters" />
       </Appbar.Header>
-      <ScrollView>
+      <ScrollView style={styles.scrollview}>
         {characters.map((i, index) => {
           return (
             <Card
@@ -46,7 +46,7 @@ const CharacterList = ({navigation}) => {
               onPress={() => navigation.navigate('Character', {id: i.char_id})}>
               <Card.Content>
                 <Card.Cover source={{uri: i.img}} />
-                <Title>{i.name}</Title>
+                <Title style={styles.whiteColor}>{i.name}</Title>
               </Card.Content>
             </Card>
           );
@@ -64,5 +64,11 @@ const styles = StyleSheet.create({
   },
   appBar: {
     backgroundColor: '#121212',
+  },
+  scrollview: {
+    backgroundColor: '#fff',
+  },
+  whiteColor: {
+    color: 'black',
   },
 });
