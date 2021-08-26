@@ -59,7 +59,7 @@ const Character = ({route, navigation}) => {
 
 const styles = StyleSheet.create({
   card: {
-    backgroundColor: '#121212',
+    backgroundColor: '#fff',
     width: '100%',
     height: '100%',
     alignItems: 'center',
