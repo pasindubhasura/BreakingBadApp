@@ -22,7 +22,7 @@ const Character = ({route, navigation}) => {
         `https://www.breakingbadapi.com/api/characters/${id}`,
       );
       setCharacter(response.data[0]);
-      console.log(character);
+      // console.log(character);
     } catch (error) {
       console.log(error);
     }
@@ -45,7 +45,9 @@ const Character = ({route, navigation}) => {
         <View style={styles.imageContainer}>
           <FitImage source={{uri: character.img}} style={styles.img} />
         </View>
-        <View></View>
+        <View style={styles.detailCard}>
+          <Text>{character.occupation}</Text>
+        </View>
       </View>
     </View>
   );
@@ -71,6 +73,23 @@ const styles = StyleSheet.create({
   },
   appBar: {
     backgroundColor: '#121212',
+  },
+  detailCard: {
+    marginTop: 80,
+    marginLeft: 12,
+    marginRight: 12,
+    height: '23%',
+    borderRadius: 8,
+    borderStyle: 'solid',
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 1,
+    },
+    shadowOpacity: 0.2,
+    shadowRadius: 1.41,
+
+    elevation: 2,
   },
 });
 

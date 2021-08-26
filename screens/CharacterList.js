@@ -18,7 +18,6 @@ const CharacterList = ({navigation}) => {
   }, []);
 
   const fetchData = async () => {
-    console.log('characters');
     try {
       const response = await axios.get(
         'https://www.breakingbadapi.com/api/characters',
