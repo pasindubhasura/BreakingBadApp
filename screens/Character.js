@@ -113,10 +113,12 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     fontSize: 20,
     marginLeft: 8,
+    fontFamily: 'Karla_Regular',
   },
   details: {
-    fontSize: 20,
+    fontSize: 18,
     marginRight: 8,
+    fontFamily: 'Karla_Regular',
   },
 });
 
