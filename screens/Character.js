@@ -72,14 +72,13 @@ const styles = StyleSheet.create({
   img: {
     width: '100%',
     height: '100%',
-    resizeMode: 'cover',
-    overflow: 'hidden',
+    resizeMode: 'contain',
   },
 
   imageContainer: {
     width: '100%',
     height: '50%',
-    alignItems: 'center',
+    overflow: 'hidden',
   },
   appBar: {
     backgroundColor: '#121212',
@@ -111,12 +110,12 @@ const styles = StyleSheet.create({
   title: {
     flex: 1,
     fontWeight: 'bold',
-    fontSize: 20,
+    fontSize: 19,
     marginLeft: 8,
     fontFamily: 'Karla_Regular',
   },
   details: {
-    fontSize: 18,
+    fontSize: 19,
     marginRight: 8,
     fontFamily: 'Karla_Regular',
   },
