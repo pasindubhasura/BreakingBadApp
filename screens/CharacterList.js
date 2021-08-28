@@ -1,10 +1,11 @@
 import React, {useState, useEffect} from 'react';
-import {View, ScrollView, StyleSheet} from 'react-native';
+import {View, ScrollView, StyleSheet, ActivityIndicator} from 'react-native';
 import axios from 'axios';
 import {Card, Title, Appbar} from 'react-native-paper';
 
 const CharacterList = ({navigation}) => {
   const [characters, setCharacters] = useState([]); //state for characters data
+  const [isLoading, setisLoading] = useState(true);
 
   useEffect(() => {
     fetchData();
@@ -16,6 +17,7 @@ const CharacterList = ({navigation}) => {
         'https://www.breakingbadapi.com/api/characters',
       );
       setCharacters(response.data);
+      setisLoading(false);
       console.log('in characters');
     } catch (error) {
       console.log(error);
@@ -23,10 +25,11 @@ const CharacterList = ({navigation}) => {
   }; //sending api request to the endpoint
 
   return (
-    <View>
+    <View style={{flex: 1}}>
       <Appbar.Header style={styles.appBar}>
         <Appbar.Content title="Breaking Bad Characters" />
       </Appbar.Header>
+
       <ScrollView style={styles.scrollview}>
         {characters.map((i, index) => {
           return (
@@ -44,6 +47,14 @@ const CharacterList = ({navigation}) => {
           );
         })}
       </ScrollView>
+      <View style={styles.spinnerContainer}>
+        <ActivityIndicator
+          animating={isLoading}
+          size="large"
+          color="#121212"
+          style={styles.spinner}
+        />
+      </View>
     </View>
   );
 };
@@ -72,5 +83,14 @@ const styles = StyleSheet.create({
   },
   whiteColor: {
     color: 'black',
+  },
+  spinnerContainer: {
+    position: 'absolute',
+    left: 0,
+    right: 0,
+    top: 0,
+    bottom: 0,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
 });
