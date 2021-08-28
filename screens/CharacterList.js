@@ -1,14 +1,7 @@
 import React, {useState, useEffect} from 'react';
-import {
-  View,
-  Text,
-  ScrollView,
-  StyleSheet,
-  Image,
-  useWindowDimensions,
-} from 'react-native';
+import {View, ScrollView, StyleSheet} from 'react-native';
 import axios from 'axios';
-import {Card, Paragraph, Title, Appbar} from 'react-native-paper';
+import {Card, Title, Appbar} from 'react-native-paper';
 
 const CharacterList = ({navigation}) => {
   const [characters, setCharacters] = useState([]); //state for characters data
