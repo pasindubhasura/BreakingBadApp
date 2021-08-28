@@ -47,14 +47,16 @@ const CharacterList = ({navigation}) => {
           );
         })}
       </ScrollView>
-      <View style={styles.spinnerContainer}>
-        <ActivityIndicator
-          animating={isLoading}
-          size="large"
-          color="#121212"
-          style={styles.spinner}
-        />
-      </View>
+      {isLoading && (
+        <View style={styles.spinnerContainer}>
+          <ActivityIndicator
+            animating={isLoading}
+            size="large"
+            color="#121212"
+            style={styles.spinner}
+          />
+        </View>
+      )}
     </View>
   );
 };
@@ -92,5 +94,7 @@ const styles = StyleSheet.create({
     bottom: 0,
     alignItems: 'center',
     justifyContent: 'center',
+    opacity: 0.3,
+    backgroundColor: 'black',
   },
 });
