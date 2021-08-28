@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {View, Text, StyleSheet, Image} from 'react-native';
+import {View, Text, StyleSheet, Image, ActivityIndicator} from 'react-native';
 import {Appbar} from 'react-native-paper';
 import axios from 'axios';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
@@ -7,6 +7,7 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome';
 const Character = ({route, navigation}) => {
   const {id} = route.params;
   const [character, setCharacter] = useState({});
+  const [isLoading, setisLoading] = useState(true);
 
   useEffect(() => {
     fetchData();
@@ -18,6 +19,7 @@ const Character = ({route, navigation}) => {
         `https://www.breakingbadapi.com/api/characters/${id}`,
       );
       setCharacter(response.data[0]);
+      setisLoading(false);
     } catch (error) {
       console.log(error);
     }
@@ -59,6 +61,16 @@ const Character = ({route, navigation}) => {
           </View>
         </View>
       </View>
+      {isLoading && (
+        <View style={styles.spinnerContainer}>
+          <ActivityIndicator
+            animating={isLoading}
+            size="large"
+            color="#121212"
+            style={styles.spinner}
+          />
+        </View>
+      )}
     </View>
   );
 };
@@ -118,6 +130,17 @@ const styles = StyleSheet.create({
     fontSize: 19,
     marginRight: 8,
     fontFamily: 'Karla_Regular',
+  },
+  spinnerContainer: {
+    position: 'absolute',
+    left: 0,
+    right: 0,
+    top: 0,
+    bottom: 0,
+    alignItems: 'center',
+    justifyContent: 'center',
+    opacity: 0.3,
+    backgroundColor: 'black',
   },
 });
 
