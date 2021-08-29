@@ -30,7 +30,7 @@ const CharacterList = ({navigation}) => {
         <Appbar.Content title="Breaking Bad Characters" />
       </Appbar.Header>
 
-      <ScrollView style={styles.scrollview}>
+      <ScrollView style={styles.scrollView}>
         {characters.map((i, index) => {
           return (
             <Card
@@ -80,7 +80,7 @@ const styles = StyleSheet.create({
   appBar: {
     backgroundColor: '#121212',
   },
-  scrollview: {
+  scrollView: {
     backgroundColor: '#fff',
   },
   whiteColor: {
