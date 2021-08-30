@@ -5,13 +5,15 @@ import {Card, Title, Appbar} from 'react-native-paper';
 import {useSelector, useDispatch} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as actionCreators from '../redux/action-creators/character-actions';
+import {getCharacters} from '../redux/initialState';
 
 const CharacterList = ({navigation}) => {
   //state for characters data
-  // const [characters, setCharacters] = useState([]);
   const [isLoading, setisLoading] = useState(true);
-  const characters_r = useSelector(state => state.characters);
-  const [characters, setCharacters] = useState([]);
+  const Mystate = useSelector(state => state);
+  const [characters, setCharacters] = useState(
+    Mystate.characterState.characters,
+  );
 
   const dispatch = useDispatch();
   const {addCharacters} = bindActionCreators(actionCreators, dispatch);
@@ -21,8 +23,8 @@ const CharacterList = ({navigation}) => {
   }, []);
 
   useEffect(() => {
-    setCharacters(characters_r.characters);
-  }, [characters_r]);
+    setCharacters(Mystate.characterState.characters);
+  }, [Mystate]);
 
   const fetchData = async () => {
     try {

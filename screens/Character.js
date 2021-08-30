@@ -3,25 +3,36 @@ import {View, Text, StyleSheet, Image, ActivityIndicator} from 'react-native';
 import {Appbar} from 'react-native-paper';
 import axios from 'axios';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import {useSelector, useDispatch} from 'react-redux';
+import {bindActionCreators} from 'redux';
+import * as actionCreators from '../redux/action-creators/character-actions';
 
 const Character = ({route, navigation}) => {
   //getting character id from route parameters
   const {id} = route.params;
 
   //state for characters data
-  const [character, setCharacter] = useState({});
+  const Mystate = useSelector(state => state);
+  const [character, setCharacter] = useState(Mystate.characterState.character);
   const [isLoading, setisLoading] = useState(true);
+
+  const dispatch = useDispatch();
+  const {addOneCharacter} = bindActionCreators(actionCreators, dispatch);
 
   useEffect(() => {
     fetchData();
   }, [id]);
+
+  useEffect(() => {
+    setCharacter(Mystate.characterState.character);
+  }, [Mystate.characterState.character]);
 
   const fetchData = async () => {
     try {
       const response = await axios.get(
         `https://www.breakingbadapi.com/api/characters/${id}`,
       );
-      setCharacter(response.data[0]);
+      addOneCharacter(response.data[0]);
       setisLoading(false);
     } catch (error) {
       console.log(error);

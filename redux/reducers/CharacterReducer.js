@@ -1,6 +1,4 @@
-const initialState = {
-  characters: [],
-};
+import {initialState} from '../initialState';
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
@@ -12,7 +10,7 @@ const reducer = (state = initialState, action) => {
     case 'addOneCharacter':
       return {
         ...state,
-        characters: action.payload,
+        character: action.payload,
       };
     default:
       return state;

@@ -2,7 +2,7 @@ import {combineReducers} from 'redux';
 import CharacterReducer from './CharacterReducer';
 
 const reducers = combineReducers({
-  characters: CharacterReducer,
+  characterState: CharacterReducer,
 });
 
 export default reducers;
