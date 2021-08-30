@@ -4,7 +4,8 @@ import axios from 'axios';
 import {Card, Title, Appbar} from 'react-native-paper';
 
 const CharacterList = ({navigation}) => {
-  const [characters, setCharacters] = useState([]); //state for characters data
+  //state for characters data
+  const [characters, setCharacters] = useState([]);
   const [isLoading, setisLoading] = useState(true);
 
   useEffect(() => {
@@ -18,7 +19,6 @@ const CharacterList = ({navigation}) => {
       );
       setCharacters(response.data);
       setisLoading(false);
-      console.log('in characters');
     } catch (error) {
       console.log(error);
     }

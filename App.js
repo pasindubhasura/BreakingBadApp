@@ -10,8 +10,10 @@ import Character from './screens/Character';
 const Stack = createNativeStackNavigator();
 
 export default App = () => {
+  //add a custom font
   let fontName = 'Karla_Regular';
   GlobalFont.applyGlobal(fontName);
+
   return (
     <PaperProvider>
       <StatusBar backgroundColor="#424242" />

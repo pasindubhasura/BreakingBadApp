@@ -5,7 +5,10 @@ import axios from 'axios';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
 const Character = ({route, navigation}) => {
+  //getting character id from route parameters
   const {id} = route.params;
+
+  //state for characters data
   const [character, setCharacter] = useState({});
   const [isLoading, setisLoading] = useState(true);
 
