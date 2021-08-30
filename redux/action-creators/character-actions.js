@@ -1,16 +1,21 @@
-export const addCharacters = () => {
-  return dispatch => {
+import axios from 'axios';
+
+export const addCharacters = response => {
+  return async dispatch => {
+    // const response = await axios.get(
+    //   'https://www.breakingbadapi.com/api/characters',
+    // );
     dispatch({
       type: 'addCharacters',
-      payload: [],
+      payload: response,
     });
   };
 };
 
-export const getOneCharacter = () => {
+export const addOneCharacter = () => {
   return dispatch => {
     dispatch({
-      type: 'getOneCharacter',
+      type: 'addOneCharacter',
       payload: [],
     });
   };

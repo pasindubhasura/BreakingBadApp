@@ -1,13 +1,19 @@
 const initialState = {
-  characters: [
-    {id: 1, name: 'tim'},
-    {id: 2, name: 'jim'},
-    {id: 3, name: 'jack'},
-  ],
+  characters: [],
 };
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
+    case 'addCharacters':
+      return {
+        ...state,
+        characters: action.payload,
+      };
+    case 'addOneCharacter':
+      return {
+        ...state,
+        characters: action.payload,
+      };
     default:
       return state;
   }

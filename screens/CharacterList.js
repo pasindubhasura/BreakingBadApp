@@ -8,28 +8,28 @@ import * as actionCreators from '../redux/action-creators/character-actions';
 
 const CharacterList = ({navigation}) => {
   //state for characters data
-  const [characters, setCharacters] = useState([]);
+  // const [characters, setCharacters] = useState([]);
   const [isLoading, setisLoading] = useState(true);
   const characters_r = useSelector(state => state.characters);
-  console.log(characters_r);
+  const [characters, setCharacters] = useState([]);
 
   const dispatch = useDispatch();
-  const {addCharacters, getOneCharacter} = bindActionCreators(
-    actionCreators,
-    dispatch,
-  );
-  console.log(addCharacters);
+  const {addCharacters} = bindActionCreators(actionCreators, dispatch);
 
   useEffect(() => {
     fetchData();
   }, []);
+
+  useEffect(() => {
+    setCharacters(characters_r.characters);
+  }, [characters_r]);
 
   const fetchData = async () => {
     try {
       const response = await axios.get(
         'https://www.breakingbadapi.com/api/characters',
       );
-      setCharacters(response.data);
+      addCharacters(response.data);
       setisLoading(false);
     } catch (error) {
       console.log(error);
@@ -73,12 +73,6 @@ const CharacterList = ({navigation}) => {
   );
 };
 
-const mapStateToProps = state => {
-  const char = state.characters;
-  return {char};
-};
-
-// export default connect(mapStateToProps)(CharacterList);
 export default CharacterList;
 
 const styles = StyleSheet.create({
