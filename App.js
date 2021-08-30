@@ -6,6 +6,8 @@ import GlobalFont from 'react-native-global-font';
 import {StatusBar} from 'react-native';
 import CharacterList from './screens/CharacterList';
 import Character from './screens/Character';
+import {Provider} from 'react-redux';
+import {store} from './redux/store';
 
 const Stack = createNativeStackNavigator();
 
@@ -15,22 +17,24 @@ export default App = () => {
   GlobalFont.applyGlobal(fontName);
 
   return (
-    <PaperProvider>
-      <StatusBar backgroundColor="#424242" />
-      <NavigationContainer>
-        <Stack.Navigator initialRouteName="CharacterList">
-          <Stack.Screen
-            name="CharacterList"
-            component={CharacterList}
-            options={{headerShown: false}}
-          />
-          <Stack.Screen
-            name="Character"
-            component={Character}
-            options={{headerShown: false}}
-          />
-        </Stack.Navigator>
-      </NavigationContainer>
-    </PaperProvider>
+    <Provider store={store}>
+      <PaperProvider>
+        <StatusBar backgroundColor="#424242" />
+        <NavigationContainer>
+          <Stack.Navigator initialRouteName="CharacterList">
+            <Stack.Screen
+              name="CharacterList"
+              component={CharacterList}
+              options={{headerShown: false}}
+            />
+            <Stack.Screen
+              name="Character"
+              component={Character}
+              options={{headerShown: false}}
+            />
+          </Stack.Navigator>
+        </NavigationContainer>
+      </PaperProvider>
+    </Provider>
   );
 };

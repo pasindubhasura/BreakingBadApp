@@ -2,11 +2,23 @@ import React, {useState, useEffect} from 'react';
 import {View, ScrollView, StyleSheet, ActivityIndicator} from 'react-native';
 import axios from 'axios';
 import {Card, Title, Appbar} from 'react-native-paper';
+import {useSelector, useDispatch} from 'react-redux';
+import {bindActionCreators} from 'redux';
+import * as actionCreators from '../redux/action-creators/character-actions';
 
 const CharacterList = ({navigation}) => {
   //state for characters data
   const [characters, setCharacters] = useState([]);
   const [isLoading, setisLoading] = useState(true);
+  const characters_r = useSelector(state => state.characters);
+  console.log(characters_r);
+
+  const dispatch = useDispatch();
+  const {addCharacters, getOneCharacter} = bindActionCreators(
+    actionCreators,
+    dispatch,
+  );
+  console.log(addCharacters);
 
   useEffect(() => {
     fetchData();
@@ -61,6 +73,12 @@ const CharacterList = ({navigation}) => {
   );
 };
 
+const mapStateToProps = state => {
+  const char = state.characters;
+  return {char};
+};
+
+// export default connect(mapStateToProps)(CharacterList);
 export default CharacterList;
 
 const styles = StyleSheet.create({
