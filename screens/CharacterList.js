@@ -5,15 +5,11 @@ import {Card, Title, Appbar} from 'react-native-paper';
 import {useSelector, useDispatch} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as actionCreators from '../redux/action-creators/character-actions';
-import {getCharacters} from '../redux/initialState';
 
 const CharacterList = ({navigation}) => {
   //state for characters data
-  const [isLoading, setisLoading] = useState(true);
-  const Mystate = useSelector(state => state);
-  const [characters, setCharacters] = useState(
-    Mystate.characterState.characters,
-  );
+  const [isLoading, setIsLoading] = useState(true);
+  const {characters} = useSelector(state => state.characterState);
 
   const dispatch = useDispatch();
   const {addCharacters} = bindActionCreators(actionCreators, dispatch);
@@ -22,17 +18,13 @@ const CharacterList = ({navigation}) => {
     fetchData();
   }, []);
 
-  useEffect(() => {
-    setCharacters(Mystate.characterState.characters);
-  }, [Mystate]);
-
   const fetchData = async () => {
     try {
       const response = await axios.get(
         'https://www.breakingbadapi.com/api/characters',
       );
       addCharacters(response.data);
-      setisLoading(false);
+      setIsLoading(false);
     } catch (error) {
       console.log(error);
     }

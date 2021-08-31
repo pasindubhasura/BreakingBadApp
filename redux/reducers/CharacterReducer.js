@@ -1,4 +1,7 @@
-import {initialState} from '../initialState';
+const initialState = {
+  characters: [],
+  character: {},
+};
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {

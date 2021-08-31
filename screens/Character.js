@@ -12,9 +12,8 @@ const Character = ({route, navigation}) => {
   const {id} = route.params;
 
   //state for characters data
-  const Mystate = useSelector(state => state);
-  const [character, setCharacter] = useState(Mystate.characterState.character);
-  const [isLoading, setisLoading] = useState(true);
+  const {character} = useSelector(state => state.characterState);
+  const [isLoading, setIsLoading] = useState(true);
 
   const dispatch = useDispatch();
   const {addOneCharacter} = bindActionCreators(actionCreators, dispatch);
@@ -23,17 +22,13 @@ const Character = ({route, navigation}) => {
     fetchData();
   }, [id]);
 
-  useEffect(() => {
-    setCharacter(Mystate.characterState.character);
-  }, [Mystate.characterState.character]);
-
   const fetchData = async () => {
     try {
       const response = await axios.get(
         `https://www.breakingbadapi.com/api/characters/${id}`,
       );
       addOneCharacter(response.data[0]);
-      setisLoading(false);
+      setIsLoading(false);
     } catch (error) {
       console.log(error);
     }
