@@ -50,21 +50,13 @@ const CharacterList = ({navigation}) => {
       </Appbar.Header>
       <Banner
         visible={visible}
-        actions={[
-          {
-            label: 'Retry',
-            onPress: () => {
-              fetchData();
-            },
-          },
-        ]}
+        actions={[]}
         icon={() => {
           return (
             <FontAwesome name="exclamation-triangle" color="black" size={35} />
           );
         }}>
-        There was a problem in your internet connection. Connect to a solid
-        internet connection then click retry.
+        Please connect to a reliable internet connection to get latest updates.
       </Banner>
       <ScrollView style={styles.scrollView}>
         {characters.map((i, index) => {
@@ -114,7 +106,7 @@ const styles = StyleSheet.create({
     elevation: 2,
   },
   appBar: {
-    backgroundColor: '#121212',
+    backgroundColor: '#174b14',
   },
   scrollView: {
     backgroundColor: '#fff',

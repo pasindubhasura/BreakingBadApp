@@ -61,14 +61,7 @@ const Character = ({route, navigation}) => {
       </Appbar.Header>
       <Banner
         visible={visible}
-        actions={[
-          {
-            label: 'Retry',
-            onPress: () => {
-              fetchData();
-            },
-          },
-        ]}
+        actions={[]}
         icon={() => {
           return (
             <FontAwesome name="exclamation-triangle" color="black" size={35} />
@@ -132,7 +125,7 @@ const styles = StyleSheet.create({
     overflow: 'hidden',
   },
   appBar: {
-    backgroundColor: '#121212',
+    backgroundColor: '#174b14',
   },
   detailCard: {
     marginTop: 12,

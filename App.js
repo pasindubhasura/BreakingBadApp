@@ -21,7 +21,7 @@ export default App = () => {
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
         <PaperProvider>
-          <StatusBar backgroundColor="#424242" />
+          <StatusBar backgroundColor="#054001" />
           <NavigationContainer>
             <Stack.Navigator initialRouteName="CharacterList">
               <Stack.Screen
