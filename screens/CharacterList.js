@@ -8,7 +8,7 @@ import * as actionCreators from '../redux/action-creators/character-actions';
 
 const CharacterList = ({navigation}) => {
   //state for characters data
-  const [isLoading, setIsLoading] = useState(true);
+  // const [isLoading, setIsLoading] = useState(true);
   const {characters} = useSelector(state => state.characterState);
 
   const dispatch = useDispatch();
@@ -24,7 +24,7 @@ const CharacterList = ({navigation}) => {
         'https://www.breakingbadapi.com/api/characters',
       );
       addCharacters(response.data);
-      setIsLoading(false);
+      // setIsLoading(false);
     } catch (error) {
       console.log(error);
     }
@@ -53,7 +53,7 @@ const CharacterList = ({navigation}) => {
           );
         })}
       </ScrollView>
-      {isLoading && (
+      {/* {isLoading && (
         <View style={styles.spinnerContainer}>
           <ActivityIndicator
             animating={isLoading}
@@ -62,7 +62,7 @@ const CharacterList = ({navigation}) => {
             style={styles.spinner}
           />
         </View>
-      )}
+      )} */}
     </View>
   );
 };

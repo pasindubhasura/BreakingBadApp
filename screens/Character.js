@@ -13,7 +13,7 @@ const Character = ({route, navigation}) => {
 
   //state for characters data
   const {character} = useSelector(state => state.characterState);
-  const [isLoading, setIsLoading] = useState(true);
+  // const [isLoading, setIsLoading] = useState(true);
 
   const dispatch = useDispatch();
   const {addOneCharacter} = bindActionCreators(actionCreators, dispatch);
@@ -28,7 +28,7 @@ const Character = ({route, navigation}) => {
         `https://www.breakingbadapi.com/api/characters/${id}`,
       );
       addOneCharacter(response.data[0]);
-      setIsLoading(false);
+      // setIsLoading(false);
     } catch (error) {
       console.log(error);
     }
@@ -70,7 +70,7 @@ const Character = ({route, navigation}) => {
           </View>
         </View>
       </View>
-      {isLoading && (
+      {/* {isLoading && (
         <View style={styles.spinnerContainer}>
           <ActivityIndicator
             animating={isLoading}
@@ -79,7 +79,7 @@ const Character = ({route, navigation}) => {
             style={styles.spinner}
           />
         </View>
-      )}
+      )} */}
     </View>
   );
 };
