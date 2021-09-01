@@ -1,14 +1,15 @@
 import React, {useState, useEffect} from 'react';
 import {View, ScrollView, StyleSheet, ActivityIndicator} from 'react-native';
 import axios from 'axios';
-import {Card, Title, Appbar} from 'react-native-paper';
+import {Card, Title, Appbar, Banner} from 'react-native-paper';
 import {useSelector, useDispatch} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as actionCreators from '../redux/action-creators/character-actions';
+import NetInfo from '@react-native-community/netinfo';
 
 const CharacterList = ({navigation}) => {
   //state for characters data
-  // const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
   const {characters} = useSelector(state => state.characterState);
 
   const dispatch = useDispatch();
@@ -18,16 +19,21 @@ const CharacterList = ({navigation}) => {
     fetchData();
   }, []);
 
-  const fetchData = async () => {
-    try {
-      const response = await axios.get(
-        'https://www.breakingbadapi.com/api/characters',
-      );
-      addCharacters(response.data);
-      // setIsLoading(false);
-    } catch (error) {
-      console.log(error);
-    }
+  const fetchData = () => {
+    NetInfo.addEventListener(async state => {
+      if (state.isConnected && state.isInternetReachable) {
+        setIsLoading(true);
+        try {
+          const response = await axios.get(
+            'https://www.breakingbadapi.com/api/characters',
+          );
+          addCharacters(response.data);
+          setIsLoading(false);
+        } catch (error) {
+          console.log(error);
+        }
+      }
+    });
   }; //sending api request to the endpoint
 
   return (
@@ -53,7 +59,7 @@ const CharacterList = ({navigation}) => {
           );
         })}
       </ScrollView>
-      {/* {isLoading && (
+      {isLoading && (
         <View style={styles.spinnerContainer}>
           <ActivityIndicator
             animating={isLoading}
@@ -62,7 +68,7 @@ const CharacterList = ({navigation}) => {
             style={styles.spinner}
           />
         </View>
-      )} */}
+      )}
     </View>
   );
 };
