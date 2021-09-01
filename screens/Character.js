@@ -1,11 +1,12 @@
 import React, {useState, useEffect} from 'react';
 import {View, Text, StyleSheet, Image, ActivityIndicator} from 'react-native';
-import {Appbar} from 'react-native-paper';
+import {Appbar, Banner} from 'react-native-paper';
 import axios from 'axios';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import {useSelector, useDispatch} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as actionCreators from '../redux/action-creators/character-actions';
+import NetInfo from '@react-native-community/netinfo';
 
 const Character = ({route, navigation}) => {
   //getting character id from route parameters
@@ -13,7 +14,8 @@ const Character = ({route, navigation}) => {
 
   //state for characters data
   const {character} = useSelector(state => state.characterState);
-  // const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(true);
+  const [visible, setVisible] = useState(false);
 
   const dispatch = useDispatch();
   const {addOneCharacter} = bindActionCreators(actionCreators, dispatch);
@@ -22,16 +24,26 @@ const Character = ({route, navigation}) => {
     fetchData();
   }, [id]);
 
-  const fetchData = async () => {
-    try {
-      const response = await axios.get(
-        `https://www.breakingbadapi.com/api/characters/${id}`,
-      );
-      addOneCharacter(response.data[0]);
-      // setIsLoading(false);
-    } catch (error) {
-      console.log(error);
-    }
+  const fetchData = () => {
+    //checking internet connection before sending API request
+    NetInfo.addEventListener(async state => {
+      if (state.isConnected && state.isInternetReachable) {
+        setIsLoading(true);
+        setVisible(false);
+        try {
+          const response = await axios.get(
+            `https://www.breakingbadapi.com/api/characters/${id}`,
+          );
+          addOneCharacter(response.data[0]);
+          setIsLoading(false);
+        } catch (error) {
+          console.log(error);
+        }
+      } else {
+        setVisible(true);
+        setIsLoading(false);
+      }
+    });
   }; //sending api request to the endpoint
 
   return (
@@ -47,6 +59,24 @@ const Character = ({route, navigation}) => {
         />
         <Appbar.Content title={character.name} />
       </Appbar.Header>
+      <Banner
+        visible={visible}
+        actions={[
+          {
+            label: 'Retry',
+            onPress: () => {
+              fetchData();
+            },
+          },
+        ]}
+        icon={() => {
+          return (
+            <FontAwesome name="exclamation-triangle" color="black" size={35} />
+          );
+        }}>
+        There was a problem in your internet connection. Connect to a solid
+        internet connection then click retry.
+      </Banner>
       <View style={styles.card}>
         <View style={styles.imageContainer}>
           <Image source={{uri: character.img}} style={styles.img} />
@@ -70,16 +100,16 @@ const Character = ({route, navigation}) => {
           </View>
         </View>
       </View>
-      {/* {isLoading && (
+      {isLoading && (
         <View style={styles.spinnerContainer}>
           <ActivityIndicator
             animating={isLoading}
             size="large"
-            color="#121212"
+            color="white"
             style={styles.spinner}
           />
         </View>
-      )} */}
+      )}
     </View>
   );
 };
@@ -148,7 +178,7 @@ const styles = StyleSheet.create({
     bottom: 0,
     alignItems: 'center',
     justifyContent: 'center',
-    opacity: 0.3,
+    opacity: 0.7,
     backgroundColor: 'black',
   },
 });
