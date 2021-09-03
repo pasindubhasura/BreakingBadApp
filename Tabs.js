@@ -1,31 +1,25 @@
 import React from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import CharacterList from './screens/CharacterList';
-import Character from './screens/Character';
-import Home from './screens/Home';
 import ListView from './screens/ListView';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import {useSelector, useDispatch} from 'react-redux';
 
 const Tab = createBottomTabNavigator();
 
-export default Tabs = () => {
-  const {characters} = useSelector(state => state.characterState);
+const Tabs = props => {
+  const {characters, episodes} = useSelector(state => state.characterState);
   return (
     <Tab.Navigator>
       <Tab.Screen
-        name="Home"
-        component={Home}
-        options={{
-          headerShown: false,
-          tabBarIcon: ({color, size}) => (
-            <FontAwesome name="home" color={color} size={size} />
-          ),
-        }}
-      />
-      <Tab.Screen
         name="Characters"
-        children={() => <ListView name="Characters" />}
+        children={() => (
+          <ListView
+            name="Characters"
+            items={characters}
+            itemNames={['char_id', 'name', 'img']}
+            navigation={props.navigation}
+          />
+        )}
         options={{
           headerShown: false,
           tabBarIcon: ({color, size}) => (
@@ -36,7 +30,11 @@ export default Tabs = () => {
       <Tab.Screen
         name="Episodes"
         children={() => (
-          <ListView name="Episodes" items={characters} itemNames={[]} />
+          <ListView
+            name="Episodes"
+            items={episodes}
+            itemNames={['episode_id', 'title', 'img']}
+          />
         )}
         options={{
           headerShown: false,
@@ -48,3 +46,5 @@ export default Tabs = () => {
     </Tab.Navigator>
   );
 };
+
+export default Tabs;

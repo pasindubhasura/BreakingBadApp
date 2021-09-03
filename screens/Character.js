@@ -11,6 +11,7 @@ import NetInfo from '@react-native-community/netinfo';
 const Character = ({route, navigation}) => {
   //getting character id from route parameters
   const {id} = route.params;
+  console.log(id);
 
   //state for characters data
   const {character} = useSelector(state => state.characterState);

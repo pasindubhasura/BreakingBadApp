@@ -1,6 +1,7 @@
 const initialState = {
   characters: [],
   character: {},
+  episodes: [],
 };
 
 const reducer = (state = initialState, action) => {
@@ -14,6 +15,11 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         character: action.payload,
+      };
+    case 'addEpisodes':
+      return {
+        ...state,
+        episodes: action.payload,
       };
     default:
       return state;

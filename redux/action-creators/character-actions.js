@@ -15,3 +15,12 @@ export const addOneCharacter = character => {
     });
   };
 };
+
+export const addEpisodes = episodes => {
+  return dispatch => {
+    dispatch({
+      type: 'addEpisodes',
+      payload: episodes,
+    });
+  };
+};

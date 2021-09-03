@@ -4,17 +4,13 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {Provider as PaperProvider} from 'react-native-paper';
 import GlobalFont from 'react-native-global-font';
 import {StatusBar} from 'react-native';
-import CharacterList from './screens/CharacterList';
-import Character from './screens/Character';
 import {Provider} from 'react-redux';
 import {store, persistor} from './redux/store';
 import {PersistGate} from 'redux-persist/integration/react';
-import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import Tabs from './Tabs';
+import Home from './screens/Home';
+import Character from './screens/Character';
 
 const Stack = createNativeStackNavigator();
-const Tab = createBottomTabNavigator();
-
 export default App = () => {
   //add a custom font
   let fontName = 'Karla_Regular';
@@ -26,7 +22,18 @@ export default App = () => {
         <PaperProvider>
           <StatusBar backgroundColor="#054001" />
           <NavigationContainer>
-            <Tabs />
+            <Stack.Navigator>
+              <Stack.Screen
+                name="Home"
+                component={Home}
+                options={{headerShown: false}}
+              />
+              <Stack.Screen
+                name="Character"
+                component={Character}
+                options={{headerShown: false}}
+              />
+            </Stack.Navigator>
           </NavigationContainer>
         </PaperProvider>
       </PersistGate>
