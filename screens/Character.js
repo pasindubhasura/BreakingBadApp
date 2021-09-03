@@ -22,7 +22,7 @@ const Character = ({route, navigation}) => {
 
   useEffect(() => {
     fetchData();
-  }, [id]);
+  }, [id]); //remove id
 
   const fetchData = () => {
     //checking internet connection before sending API request

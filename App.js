@@ -9,8 +9,11 @@ import Character from './screens/Character';
 import {Provider} from 'react-redux';
 import {store, persistor} from './redux/store';
 import {PersistGate} from 'redux-persist/integration/react';
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import Tabs from './Tabs';
 
 const Stack = createNativeStackNavigator();
+const Tab = createBottomTabNavigator();
 
 export default App = () => {
   //add a custom font
@@ -23,18 +26,7 @@ export default App = () => {
         <PaperProvider>
           <StatusBar backgroundColor="#054001" />
           <NavigationContainer>
-            <Stack.Navigator initialRouteName="CharacterList">
-              <Stack.Screen
-                name="CharacterList"
-                component={CharacterList}
-                options={{headerShown: false}}
-              />
-              <Stack.Screen
-                name="Character"
-                component={Character}
-                options={{headerShown: false}}
-              />
-            </Stack.Navigator>
+            <Tabs />
           </NavigationContainer>
         </PaperProvider>
       </PersistGate>
