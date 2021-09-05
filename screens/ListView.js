@@ -1,12 +1,14 @@
 import React, {useState} from 'react';
 import {View, Text, StyleSheet, ScrollView} from 'react-native';
 import {Card, Title, Appbar, Banner} from 'react-native-paper';
+import {useSelector, useDispatch} from 'react-redux';
 import axios from 'axios';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
 const ListView = props => {
   const [items, setItems] = useState(props.items);
   const [itemNames, setItemNames] = useState(props.itemNames);
+  const {characters, episodes} = useSelector(state => state.characterState);
   return (
     <View>
       <Appbar.Header style={styles.appBar}>
@@ -21,8 +23,9 @@ const ListView = props => {
               mode="elevated"
               style={styles.card}
               onPress={() =>
-                props.navigation.navigate('Character', {
+                props.navigation.navigate('ListItem', {
                   id: i[itemNames[0]],
+                  name: props.name,
                 })
               }>
               <Card.Content>

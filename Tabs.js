@@ -9,7 +9,14 @@ const Tab = createBottomTabNavigator();
 const Tabs = props => {
   const {characters, episodes} = useSelector(state => state.characterState);
   return (
-    <Tab.Navigator>
+    <Tab.Navigator
+      screenOptions={{
+        tabBarStyle: {
+          backgroundColor: '#174b14',
+        },
+        tabBarInactiveTintColor: 'white',
+        tabBarActiveTintColor: '#45ff3b',
+      }}>
       <Tab.Screen
         name="Characters"
         children={() => (
@@ -34,6 +41,7 @@ const Tabs = props => {
             name="Episodes"
             items={episodes}
             itemNames={['episode_id', 'title', 'img']}
+            navigation={props.navigation}
           />
         )}
         options={{

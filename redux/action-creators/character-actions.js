@@ -24,3 +24,12 @@ export const addEpisodes = episodes => {
     });
   };
 };
+
+export const addOneEpisode = episode => {
+  return dispatch => {
+    dispatch({
+      type: 'addOneEpisode',
+      payload: episode,
+    });
+  };
+};

@@ -9,6 +9,7 @@ import {store, persistor} from './redux/store';
 import {PersistGate} from 'redux-persist/integration/react';
 import Home from './screens/Home';
 import Character from './screens/Character';
+import ListItem from './screens/ListItem';
 
 const Stack = createNativeStackNavigator();
 export default App = () => {
@@ -31,6 +32,11 @@ export default App = () => {
               <Stack.Screen
                 name="Character"
                 component={Character}
+                options={{headerShown: false}}
+              />
+              <Stack.Screen
+                name="ListItem"
+                component={ListItem}
                 options={{headerShown: false}}
               />
             </Stack.Navigator>
